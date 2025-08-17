@@ -46,10 +46,25 @@ export default function ProductPage() {
     }
   }, [params.id]);
 
-  const handleBuyNow = () => {
-    if (!product) return;
-    alert(`Added ${product.name} to cart!`);
-  };
+  const handleBuyNow = async () => {
+  if (!product) return;
+
+  try {
+    const res = await fetch("/api/checkout", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ product }),
+    });
+
+    const data = await res.json();
+    if (data.url) {
+      window.location.href = data.url; // Redirect to Stripe Checkout
+    }
+  } catch (error) {
+    console.error("Stripe error:", error);
+  }
+};
+
 
   if (loading) {
     return (
