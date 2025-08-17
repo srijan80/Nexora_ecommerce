@@ -1,0 +1,19 @@
+datasource db {
+  provider = "postgresql"
+  url      = "postgresql://postgres:mvDACfL86evyO2tW@db.nefwglwsjmsscxtchjzp.supabase.co:5432/postgres"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Product {
+  id        Int      @id @default(autoincrement())
+  name      String
+  gender    String
+  price     Float
+  oldPrice  Float?   
+  image     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
