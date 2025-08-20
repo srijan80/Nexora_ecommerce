@@ -29,7 +29,7 @@ function HeroSection({ title, src }: { title: string; src: string }) {
             {title}
           </h1>
           <p className="text-gray-700 dark:text-gray-300 mb-6 text-lg md:text-xl">
-            Shop the latest trends for Men, Women, Kids & Sportswear. Quality
+            Shop the latest trends for Men, Women. Quality
             products delivered right to your doorstep.
           </p>
 

@@ -5,14 +5,13 @@ import {
   Navbar,
   NavBody,
   MobileNav,
-  NavbarLogo,
   NavbarButton,
   MobileNavHeader,
   MobileNavToggle,
   MobileNavMenu,
 } from "@/components/ui/resizable-navbar";
 import { useScroll, motion } from "framer-motion";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { auth, provider } from "@/lib/firebase";
 import { onAuthStateChanged, signInWithPopup, User } from "firebase/auth";
 
@@ -70,15 +69,31 @@ export default function NavbarDemo() {
         <Navbar>
           {/* Desktop Nav */}
           <NavBody visible={shrink}>
-            <NavbarLogo />
+            {/* Replaced existing logo component with Nexora text */}
+            <div className="flex items-center gap-2 cursor-pointer select-none">
+              {/* Logo Icon */}
+              <div className="w-7 h-7 rounded-full bg-slate-900 dark:bg-white flex items-center justify-center shadow-md">
+                <span className="text-white dark:text-slate-900 font-bold text-lg">
+                  N
+                </span>
+              </div>
+
+              {/* Logo Text */}
+              <span className="text-1xl md:text-1xl font-semibold text-slate-900 dark:text-white">
+                Nexora
+              </span>
+            </div>
+
             <div className="flex items-center gap-4">
               {user ? (
                 <>
-                  <img
-                    src="https://img.freepik.com/free-vector/smiling-young-man-illustration_1308-174669.jpg"
-                    alt={user.displayName || "User"}
-                    className="w-8 h-8 rounded-full "
-                  />
+                  <button
+                    onClick={() => redirect("/admin")}
+                    className="bg-blue-950 cursor-pointer text-white px-4 py-2 rounded-2xl hover:bg-blue-900 transition"
+                  >
+                    Admin
+                  </button>
+
                   <NavbarButton onClick={handleLogout} variant="secondary">
                     Logout
                   </NavbarButton>
@@ -94,7 +109,10 @@ export default function NavbarDemo() {
           {/* Mobile Nav */}
           <MobileNav visible={shrink}>
             <MobileNavHeader>
-              <NavbarLogo />
+              {/* Mobile logo replaced with Nexora text */}
+              <div className="text-xl font-bold text-slate-900 dark:text-white cursor-pointer">
+                Nexora
+              </div>
               <MobileNavToggle
                 isOpen={isMobileMenuOpen}
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
